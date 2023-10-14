@@ -11,10 +11,10 @@ class Livro extends Model
 
     protected $table = 'livros';
 
-    protected $fillables = [
-        'Título',
-        'Autor',
-        'Classificação',
-        'Resenha'
+    protected $fillable = [
+        'titulo',
+        'autor',
+        'classificacao',
+        'resenha'
     ];
 }
