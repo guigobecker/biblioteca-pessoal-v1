@@ -66,4 +66,22 @@ class LivroController extends Controller
             }
         }
     }
+
+    public function show($id) {
+        $livro = Livro::find($id);
+
+        if($livro) {
+            return response()->json([
+                'status' => 200,
+                'livro' => $livro 
+            ], 200);
+        }
+
+        else {
+            return response()->json([
+                'status' => 404,
+                'mensagem' => 'Livro não encontrado.' 
+            ], 404);            
+        }
+    }
 }
