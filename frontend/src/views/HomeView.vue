@@ -4,7 +4,7 @@
       <div class="card-header">
         <h4>
           Livros
-          <RouterLink to="/livro/create" class="btn btn-primary float-end">
+          <RouterLink to="/create" class="btn btn-primary float-end">
             Adicionar
           </RouterLink>
         </h4>

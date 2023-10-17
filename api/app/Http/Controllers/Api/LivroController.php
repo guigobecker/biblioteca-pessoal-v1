@@ -22,7 +22,7 @@ class LivroController extends Controller
         else {
             return response()->json([
                 'status' => 404,
-                'mensagem' => 'Nenhum livro encontrado.'
+                'message' => 'Nenhum livro encontrado.'
             ], 404);
         }
 
@@ -54,14 +54,14 @@ class LivroController extends Controller
             if($livro) {
                 return response()->json([
                     'status' => 200,
-                    'mensagem' => 'Livro adicionado com sucesso.' 
+                    'message' => 'Livro adicionado com sucesso.' 
                 ], 200);
             }
 
             else {
                 return response()->json([
                     'status' => 500,
-                    'mensagem' => 'Algo deu errado.' 
+                    'message' => 'Algo deu errado.' 
                 ], 500);
             }
         }
@@ -80,7 +80,7 @@ class LivroController extends Controller
         else {
             return response()->json([
                 'status' => 404,
-                'mensagem' => 'Livro não encontrado.' 
+                'message' => 'Livro não encontrado.' 
             ], 404);            
         }
     }
@@ -98,7 +98,7 @@ class LivroController extends Controller
         else {
             return response()->json([
                 'status' => 404,
-                'mensagem' => 'Livro não encontrado.' 
+                'message' => 'Livro não encontrado.' 
             ], 404);            
         }        
     }
@@ -133,14 +133,14 @@ class LivroController extends Controller
 
                 return response()->json([
                     'status' => 200,
-                    'mensagem' => 'Livro atualizado com sucesso.' 
+                    'message' => 'Livro atualizado com sucesso.' 
                 ], 200);
             }
 
             else {
                 return response()->json([
                     'status' => 404,
-                    'mensagem' => 'Livro não encontrado.' 
+                    'message' => 'Livro não encontrado.' 
                 ], 404);
             }
         }        
