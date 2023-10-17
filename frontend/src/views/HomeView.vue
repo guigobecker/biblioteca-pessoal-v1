@@ -32,7 +32,7 @@
                 <RouterLink :to="{ path: '/livros/'+ livro.id +'/edit' }" class="btn btn-success">
                   Editar
                 </RouterLink>
-                <button type="button" class="btn btn-danger">Deletar</button>
+                <button type="button" @click="deleteLivro(livro.id)" class="btn btn-danger">Deletar</button>
               </td>
             </tr>
           </tbody>
@@ -63,8 +63,23 @@ export default {
       axios.get('http://localhost:8000/api/livros').then(res => {
         this.livros = res.data.livros;
       })
+    },
+
+    deleteLivro(livroId) {
+      if(confirm('Tem certeza que deseja deletar este livro?')){
+        axios.delete(`http://localhost:8000/api/livros/${livroId}/delete`).then(res => {
+          alert(res.data.message);
+          this.getLivros();
+        })
+        .catch(function (error) {
+          if (error.response) {
+            if (error.response.status === 404) {
+              alert(error.response.data.message);
+            }
+          }
+        })
+      }
     }
   }
 }
-
 </script>

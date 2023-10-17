@@ -24,3 +24,4 @@ Route::post('livros', [LivroController::class, 'store']);
 Route::get('livros/{id}', [LivroController::class, 'show']);
 Route::get('livros/{id}/edit', [LivroController::class, 'edit']);
 Route::put('livros/{id}/edit', [LivroController::class, 'update']);
+Route::delete('livros/{id}/delete', [LivroController::class, 'destroy']);
