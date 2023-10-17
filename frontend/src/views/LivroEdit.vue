@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
-                <h4>Adicionar livro</h4>
+                <h4>Editar livro</h4>
             </div>
             <div class="card-body">
                 <ul class="alert alert-warning" v-if="Object.keys(this.errorList).length > 0">
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <button type="button" @click="saveLivro" class="btn btn-primary">Salvar</button>
+                    <button type="button" @click="updateLivro" class="btn btn-primary">Atualizar</button>
                 </div>
             </div>
         </div>
@@ -43,11 +43,11 @@
 import axios from 'axios';
 
 export default {
-    name: 'Create',
+    name: 'Edit',
     data() {
         return {
+            livroId: '',
             errorList: '',
-
             model: {
                 livro: {
                     titulo: '',
@@ -58,22 +58,32 @@ export default {
             }
         }
     },
+    mounted() {
+        this.livroId = this.$route.params.id;
+        this.getLivroData(this.$route.params.id);
+    },
 
     methods: {
-        saveLivro() {
+        getLivroData(livroId) {
+            axios.get(`http://localhost:8000/api/livros/${livroId}/edit`).then(res => {
+                this.model.livro = res.data.livro;
+            })
+            .catch(function (error) {
+                    if (error.response) {
+                        if (error.response.status === 404) {
+                            alert(error.response.data.message);
+                        }
+                    }
+            });
+        },
+
+        updateLivro() {
             var myThis = this;
 
-            axios.post('http://localhost:8000/api/livros', this.model.livro)
+            axios.put(`http://localhost:8000/api/livros/${this.livroId}/edit`, this.model.livro)
                 .then(res => {
                     console.log(res.data);
                     alert(res.data.message);
-
-                    this.model.livro = {
-                        titulo: '',
-                        autor: '',
-                        classificacao: '',
-                        resenha: ''
-                    }
 
                     this.errorList = '';
                 })
@@ -82,6 +92,11 @@ export default {
                         if (error.response.status === 422) {
                             myThis.errorList = error.response.data.errors;
                         }
+
+                        if (error.response.status === 404) {
+                            alert(error.response.data.message);
+                        }
+
                     } else if (error.request){
                         console.log(error.request);
                     } else {

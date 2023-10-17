@@ -29,7 +29,7 @@
               <td>{{ livro.resenha }}</td>
               <td>{{ livro.created_at }}</td>
               <td>
-                <RouterLink to="/" class="btn btn-success">
+                <RouterLink :to="{ path: '/livros/'+ livro.id +'/edit' }" class="btn btn-success">
                   Editar
                 </RouterLink>
                 <button type="button" class="btn btn-danger">Deletar</button>
